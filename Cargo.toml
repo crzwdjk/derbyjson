@@ -1,0 +1,9 @@
+[package]
+name = "derbyjson"
+version = "0.0.1"
+authors = ["Arcady Goldmints-Orlov <crzwdjk@gmail.com>"]
+
+[dependencies]
+serde = "^0.9"
+serde_json = "^0.9.3"
+serde_derive = "^0.9"
