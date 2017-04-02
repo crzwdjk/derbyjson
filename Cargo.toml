@@ -1,6 +1,6 @@
 [package]
 name = "derbyjson"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Arcady Goldmints-Orlov <crzwdjk@gmail.com>"]
 repository = "https://github.com/crzwdjk/derbyjson"
 license-file = "LICENSE"
