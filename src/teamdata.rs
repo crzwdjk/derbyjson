@@ -50,7 +50,7 @@ pub struct Person {
     pub legal: Option<String>,
     #[serde(default)]
     pub roles: Vec<String>,
-    pub skated: bool,
+    pub skated: Option<bool>,
     pub uuid: Option<Vec<String>>,
     pub insurance: Option<Vec<String>>,
 }

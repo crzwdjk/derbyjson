@@ -1,0 +1,35 @@
+{
+    "version":"0.2",
+    "type":"rosters",
+    "teams":{
+        "toastercity": {
+            "name": "Toaster City",
+            "persons": [
+                { "number": "3", "name":"" },
+                { "number": "10", "name":""  },
+                { "number": "28", "name":""  },
+                { "number": "40", "name":"" },
+                { "number": "45", "name":"" },
+                { "number": "46", "name":""  },
+                { "number": "223", "name":""  },
+                { "number": "247", "name":""  },
+                { "number": "303", "name":""  }
+            ]
+        },
+        "watercity": {
+            "name": "Water City",
+            "persons": [
+                { "number": "0", "name":""  },
+                { "number": "06", "name":""  },
+                { "number": "16", "name":""  },
+                { "number": "6", "name":""  },
+                { "number": "666", "name":""  },
+                { "number": "26", "name":""  },
+                { "number": "61", "name":""  },
+                { "number": "333", "name":""  }
+            ]
+        }
+    }
+}
+    
+

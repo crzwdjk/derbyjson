@@ -2,6 +2,9 @@
 name = "derbyjson"
 version = "0.0.1"
 authors = ["Arcady Goldmints-Orlov <crzwdjk@gmail.com>"]
+repository = "https://github.com/crzwdjk/derbyjson"
+license-file = "LICENSE"
+description = "A package to serialize to and deserialize from the DerbyJSON format for roller derby data"
 
 [dependencies]
 serde = "^0.9"

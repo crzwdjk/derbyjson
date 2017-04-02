@@ -1,4 +1,4 @@
-//! Module comment
+//! DerbyJSON parser, based on serde.
 
 
 #![feature(custom_attribute)]
@@ -51,7 +51,7 @@ pub struct DerbyJSON {
 #[serde(deny_unknown_fields)]
 pub struct Rosters {
     pub version: Option<String>,
-    pub metadata: serde_json::Map<String, serde_json::Value>,
+    pub metadata: Option<serde_json::Map<String, serde_json::Value>>,
     #[serde(rename = "type")]
     pub objecttype: ObjectType,
     pub teams: HashMap<String, Team>,
@@ -61,6 +61,20 @@ pub struct Rosters {
     pub notes: Vec<Note>,
     #[serde(default)]
     pub leagues: Vec<League>,
+}
+
+impl Rosters {
+    pub fn new(teams: HashMap<String, Team>) -> Rosters {
+        Rosters {
+            version: Some(format!("0.2")),
+            metadata: None,
+            objecttype: ObjectType::Rosters,
+            teams: teams,
+            uuid: vec!(),
+            notes: vec!(),
+            leagues: vec!(),
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
@@ -149,7 +163,17 @@ pub fn load_roster<R>(reader: R) -> Result<Rosters, Error>
     return Ok(obj);
 }
 
-
-#[test]
-fn it_works() {
+#[cfg(test)]
+mod tests {
+    use std::io::Cursor;
+    #[test]
+    fn it_works() {
+        let text = include_bytes!("rosters.json");
+        let reader = Cursor::new(&text[..]);
+        let res = super::load_roster(reader);
+        println!("{:?}",res.as_ref().err());
+        assert!(res.is_ok());
+        let djson = res.unwrap();
+        assert!(djson.teams.len() == 2);
+    }
 }
