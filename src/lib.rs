@@ -46,7 +46,52 @@ pub struct DerbyJSON {
     pub suspensions: Vec<String>,
     pub signatures: Vec<serde_json::Value>, // XXX: spec says signature objects
     pub sanctioned: bool,
-    pub association: Association,
+    pub association: Option<Association>,
+}
+
+impl DerbyJSON {
+    /// Create an empty DerbyJSON structure corresponding to a game.
+    /// It fills in default/empty values for almost everything and
+    /// creates two periods.
+    pub fn new_game(teams: HashMap<String, Team>) -> DerbyJSON {
+        let timers = Timers {
+            countdown: None,
+            halftime: None,
+            jam: None,
+            period: Timer {
+                duration: 30 * 60,
+                counts_down: true,
+                running: false,
+            }
+        };
+
+        DerbyJSON {
+            version: Some(VERSION.to_string()),
+            objecttype: ObjectType::Game,
+            metadata: serde_json::Map::new(),
+            ruleset: None,
+            venue: None,
+            uuid: Vec::new(),
+            notes: Vec::new(),
+            leagues: None,
+            tournament: None,
+            host_league: None,
+            expulsions: Vec::new(),
+            suspensions: Vec::new(),
+            signatures: Vec::new(),
+            association: None,
+
+            date: String::new(),
+            time: String::new(),
+            end_time: String::new(),
+
+            sanctioned: false,
+            teams: teams,
+
+            periods: vec![Period::default(), Period::default()],
+            timers: timers,
+        }
+    }
 }
 
 /// A subset of the general DerbyJSON object, just storing information on
@@ -116,7 +161,7 @@ pub struct Ruleset {
 pub struct Timers {
     pub countdown: Option<Timer>,
     pub period: Timer,
-    pub haltime: Option<Timer>,
+    pub halftime: Option<Timer>,
     pub jam: Option<Timer>,
 }
 
