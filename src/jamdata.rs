@@ -203,10 +203,10 @@ pub enum ClockEvent {
 #[derive(Serialize, Deserialize)]
 pub enum TeamType { Home, Away, Officials }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Default)]
 pub struct Period {
-    pub timestamp: Timestamp,
-    pub end: Timestamp,
+    pub timestamp: Option<Timestamp>,
+    pub end: Option<Timestamp>,
     pub jams: Vec<ClockEvent>
 }
 
