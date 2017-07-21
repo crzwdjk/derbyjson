@@ -14,6 +14,10 @@ pub use jamdata::*;
 mod teamdata;
 pub use teamdata::*;
 
+/// Version of DerbyJSON supported
+pub const VERSION: &str = "0.2";
+
+
 /// The root DerbyJSON object. This can store information about a game, or about
 /// a league or a team. Which one it is is determined by the "objecttype" field
 /// and determines which fields are valid.
@@ -66,7 +70,7 @@ pub struct Rosters {
 impl Rosters {
     pub fn new(teams: HashMap<String, Team>) -> Rosters {
         Rosters {
-            version: Some(format!("0.2")),
+            version: Some(VERSION.to_string()),
             metadata: None,
             objecttype: ObjectType::Rosters,
             teams: teams,
@@ -156,7 +160,7 @@ pub fn load_roster<R>(reader: R) -> Result<Rosters, Error>
         return Err(Error::UnexpectedType(t));
     }
     if let Some(ref version) = obj.version {
-        if version != "0.2" {
+        if version != VERSION {
             return Err(Error::UnexpectedVersion(version.clone()));
         }
     }
